@@ -3,5 +3,23 @@
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="prompt_password">Password</string>
+    <string name="title_activity_login">Sign in</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_register">Register</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <color name="white">#FFFFFF</color>
+    <color name="lightBlue">#c2daef</color>
+    <color name="profileBlue">#6fc6f7</color>
+    <color name="darkSky">#7cbaf3</color>
+    <color name="black">#000000</color>
+    <color name="transparent_black">#40000000</color>
+    <color name="official">#070d52</color>
+    <string name="title_activity_admin_nav">AdminNav</string>
+    <string name="title_activity_welcome_nav">WelcomeNav</string>
 </resources>
