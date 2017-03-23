@@ -148,6 +148,8 @@ public class Profile extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(), WelcomeNav.class));
         } else if (id == R.id.nav_profile) {
             startActivity(new Intent(getApplicationContext(), Profile.class));
+        } else if (id == R.id.nav_map) {
+            startActivity(new Intent(getApplicationContext(), technovations.ajuj.technovations2017.Map.class));
         } else if (id == R.id.nav_log) {
             //startActivity(new Intent(getApplicationContext(), Log.class));
         } else if (id == R.id.nav_logout) {
