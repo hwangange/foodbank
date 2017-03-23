@@ -1,11 +1,7 @@
 package technovations.ajuj.technovations2017;
 
-/**
- * Created by jenny on 3/12/2017.
- */
 
 import android.content.Intent;
-import android.content.pm.PackageInstaller;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -19,41 +15,44 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import technovations.ajuj.technovations2017.*;
-//import technovations.ajuj.technovations2017.Log;
-//import technovations.ajuj.technovations2017.Profile;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+//import com.technovations.innova.technovations2.*;
+//import com.technovations.innova.technovations2.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class WelcomeNav extends AppCompatActivity
+public class Profile extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private SessionManagement session;
-    private TextView navDrawerName, navDrawerUsername, navDrawerWelcome, hoursStatus;
-    private Button profileButton, draftsButton, submitButton, logButton;
+    SessionManagement session;
+    TextView profileUsername, profileName, profileEmail, profileNumber, profileAddress, profileOrganization;
+    private TextView navDrawerStudentName, navDrawerStudentUsername;
+    private Button checkHours;
+    String username;
+
+  /*  String URL = "http://ajuj.comlu.com/checkHours.php";
+    private RequestQueue requestQueue;
+    private StringRequest request; */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome_nav);
+        setContentView(R.layout.activity_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        session = new SessionManagement(getApplicationContext());
-        session.checkLogin();
-
-        HashMap<String, String> user = session.getUserDetails();
-        //user, name, orgname, address, phoneNumber, email, dorr
-        String username = user.get(SessionManagement.KEY_USERNAME);
-        String name = user.get(SessionManagement.KEY_NAME);
-        String orgname = user.get(SessionManagement.KEY_ORGNAME);
-        String address = user.get(SessionManagement.KEY_ADDRESS);
-        int phoneNumber = Integer.parseInt(user.get(SessionManagement.KEY_PHONENUMBER));
-        String email = user.get(SessionManagement.KEY_EMAIL);
-        String dorr = user.get(SessionManagement.KEY_DORR);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,51 +63,48 @@ public class WelcomeNav extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        session = new SessionManagement(getApplicationContext());
+        profileUsername = (TextView) findViewById(R.id.profileUsername);
+        profileName = (TextView) findViewById(R.id.profileName);
+        profileEmail = (TextView) findViewById(R.id.profileEmail);
+        profileNumber= (TextView) findViewById(R.id.profileNumber);
+        profileAddress= (TextView) findViewById(R.id.profileAddress);
+        profileOrganization = (TextView) findViewById(R.id.profileOrganization);
+
+        /**
+         * Call this function whenever you want to check user login
+         * This will redirect user to LoginActivity is he is not
+         * logged in
+         * */
+        session.checkLogin();
+
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+        username = user.get(SessionManagement.KEY_USERNAME);
+        String name = user.get(SessionManagement.KEY_NAME);
+        String email = user.get(SessionManagement.KEY_EMAIL);
+        String orgname = user.get(SessionManagement.KEY_ORGNAME);
+        String address = user.get(SessionManagement.KEY_ADDRESS);
+        int phoneNumber = Integer.parseInt(user.get(SessionManagement.KEY_PHONENUMBER));
+        String dorr = user.get(SessionManagement.KEY_DORR);
+
         View header = LayoutInflater.from(this).inflate(R.layout.nav_header_welcome_nav, null);
         navigationView.addHeaderView(header);
 
-        navDrawerName = (TextView) header.findViewById(R.id.navDrawerName);
-        navDrawerUsername = (TextView) header.findViewById(R.id.navDrawerUsername);
 
+        navDrawerStudentName = (TextView) header.findViewById(R.id.navDrawerName);
+        navDrawerStudentUsername = (TextView) header.findViewById(R.id.navDrawerUsername);
 
-        navDrawerWelcome = (TextView) findViewById(R.id.navDrawerWelcome);
-        hoursStatus = (TextView) findViewById(R.id.hoursStatus);
+        navDrawerStudentName.setText(name);
+        navDrawerStudentUsername.setText(username);
 
-        navDrawerName.setText(name); //i   crie
-        navDrawerUsername.setText(username);
-        navDrawerWelcome.setText(Html.fromHtml("Welcome to DeLITE, <b>" + username + "</b>"));
-      //  hoursStatus.setText(Html.fromHtml("<b>Hours: </b>" + hours));
+        profileUsername.setText(Html.fromHtml("<b>User: </b>" + username));
+        profileName.setText(Html.fromHtml("<b>Name: </b>" + name));
+        profileEmail.setText(Html.fromHtml("<b>Email: </b>" + email));
+        profileOrganization.setText(Html.fromHtml("<b>Organization: </b>" + orgname));
+        profileNumber.setText(Html.fromHtml("<b>Phone Number: </b> " + phoneNumber));
+        profileAddress.setText(Html.fromHtml("<b>Address: </b> " + address));
 
-        profileButton = (Button) findViewById(R.id.profileButton);
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Profile.class));
-            }
-        });
-
-        /*
-        draftsButton = (Button) findViewById(R.id.draftsButton);
-        draftsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Drafts.class));
-            }
-        });
-        logButton = (Button) findViewById(R.id.logButton);
-        logButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Log.class));
-            }
-        });
-        submitButton = (Button) findViewById(R.id.submitButton);
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Create.class));
-            }
-        }); */
     }
 
     @Override
@@ -124,7 +120,7 @@ public class WelcomeNav extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.welcome_nav, menu);
+        getMenuInflater().inflate(R.menu.profile, menu);
         return true;
     }
 
@@ -148,7 +144,6 @@ public class WelcomeNav extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_home) {
             startActivity(new Intent(getApplicationContext(), WelcomeNav.class));
         } else if (id == R.id.nav_profile) {
@@ -158,6 +153,7 @@ public class WelcomeNav extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             session.logoutUser();
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
