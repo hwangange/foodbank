@@ -131,6 +131,61 @@
 
 
             </TableLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/white"
+                android:text="I can provide/I am interested in receiving..."
+                android:id="@+id/provide" />
+
+            <CheckBox
+                android:id="@+id/dairy_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Milk, yogurt, cheese"
+                android:textColor="#f0f8f9"
+                android:buttonTint="@color/white" />
+
+            <CheckBox
+                android:id="@+id/fruit_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fruits"
+                android:textColor="#f0f8f9"
+                android:buttonTint="@color/white"/>
+
+            <CheckBox
+                android:id="@+id/vegetable_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vegetables"
+                android:textColor="#f0f8f9"
+                android:buttonTint="@color/white"/>
+
+            <CheckBox
+                android:id="@+id/meat_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Meat, Poultry, Fish, Beans, Eggs, Nuts"
+                android:textColor="#f0f8f9"
+                android:buttonTint="@color/white"/>
+
+            <CheckBox
+                android:id="@+id/bread_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bread, Cereal, Rice, Pasta"
+                android:textColor="#f0f8f9"
+                android:buttonTint="@color/white"/>
+
+            <CheckBox
+                android:id="@+id/fats_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fats, Oil, Sweets"
+                android:textColor="#f0f8f9"
+                android:buttonTint="@color/white"/>
 
 
             <Button android:id="@+id/register_register"

@@ -36,9 +36,11 @@ public class Register extends AppCompatActivity {
     private TextView guideline;
     private Button register, back;
     private CheckBox donor, receiver;
+    //private CheckBox fruit, vegetable, dairy, meat, bread, fats;
     private RequestQueue requestQueue;
     private StringRequest request;
     private String DorR;
+    private String interests = "";
     private String URL = "";
 
     @Override
@@ -61,6 +63,33 @@ public class Register extends AppCompatActivity {
         else
             DorR = "receiver";
 
+     /*   fruit = (CheckBox) findViewById(R.id.fruit_register);
+        vegetable = (CheckBox) findViewById(R.id.vegetable_register);
+        dairy = (CheckBox) findViewById(R.id.dairy_register);
+        meat = (CheckBox) findViewById(R.id.meat_register);
+        bread = (CheckBox) findViewById(R.id.bread_register);
+        fats = (CheckBox) findViewById(R.id.fats_register);
+
+        if(fruit.isChecked())
+        {
+            interests+="Fruits; ";
+            Toast.makeText(getApplicationContext(),"Fruit is checked",Toast.LENGTH_SHORT).show();
+        }
+
+        if(vegetable.isChecked())
+            interests+="Vegetables; ";
+        if(dairy.isChecked())
+            interests+="Milk, Yogurt, Cheese; ";
+        if(meat.isChecked())
+            interests+="Meat, Poultry, Fish, Beans, Eggs, Nuts; ";
+        if(bread.isChecked())
+            interests+="Bread, Cereal, Rice, Pasta; ";
+        if(fats.isChecked())
+            interests+="Fats, Oil, Sweets; ";
+        if(interests.length()>0)
+            interests = interests.substring(0, interests.length()-2);
+        Toast.makeText(getApplicationContext(),"This is interests: "+interests,Toast.LENGTH_SHORT).show(); */
+
         register = (Button) findViewById(R.id.register_register);
         back = (Button) findViewById(R.id.back_register);
         guideline = (TextView) findViewById(R.id.guideline);
@@ -75,7 +104,7 @@ public class Register extends AppCompatActivity {
                 request = new StringRequest(Request.Method.POST, "https://2017ajuj.000webhostapp.com/register.php", new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                         Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
                         try{
                             Toast.makeText(getApplicationContext(), "successfully inside the try", Toast.LENGTH_SHORT).show();
                             JSONObject jsonObject = new JSONObject(response);
@@ -109,6 +138,7 @@ public class Register extends AppCompatActivity {
                         hashMap.put("address", address.getText().toString());
                         hashMap.put("phoneNumber", phoneNumber.getText().toString());
                         hashMap.put("dorr", DorR);
+                        hashMap.put("interests", interests);
 
 
                         return hashMap;
@@ -123,7 +153,7 @@ public class Register extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                startActivity(new Intent(getApplicationContext(), Login.class));
+               startActivity(new Intent(getApplicationContext(), Login.class));
             }
         });
 

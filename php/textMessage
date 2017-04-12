@@ -1,0 +1,63 @@
+<?php
+require_once 'connection.php';
+header('Content-Type: application/json ');
+	class User {
+		private $db;
+		private $connection;
+		function __construct(){
+			$this->db = new DB_Connection();
+			$this->connection = $this->db->get_connection();
+		}
+		public function does_user_exist($uniqueid){
+			$query = "Select * from claimed where id = '$uniqueid'";
+			$result = mysqli_query($this->connection, $query);
+			if(mysqli_num_rows($result)>0){
+				while ($row = $result->fetch_assoc()) {
+					$user = $row['user']; 
+					$interests = $row['interests'];
+					$receiver = $row['receiver'];
+				}
+				$json['user'] = $user;
+				$json['interests'] = $interests;
+				$json['receiver'] = $receiver;
+
+				$query = "Select * from users where username = '$user'";
+				$result = mysqli_query($this->connection, $query);
+				if(mysqli_num_rows($result)>0){
+					while ($row = $result->fetch_assoc()) {
+						$phoneNumber = $row['phoneNumber']; 
+					}
+
+					$json['phoneNumber'] = $phoneNumber;
+					$json['success'] = 'Successfully retrieved donor phone number';
+					
+				}
+
+				else {
+					$json['error'] = 'Unable to retrieve donor phone number';
+				} 
+
+			}
+
+			else {
+				$json['error'] = 'User does not exist';
+			}
+			echo json_encode($json);
+			mysqli_close($this->connection);
+			
+		}
+		
+	}
+	$user = new User();
+	if(isset($_POST['uniqueid'])) {
+		$uniqueid = $_POST['uniqueid'];
+		if(!empty($uniqueid)) {
+			$user -> does_user_exist($uniqueid);
+			$json['yuhh'] = 'yuhhh';
+		}else {
+			$json['error'] = 'Unable to pass value';
+			echo json_encode($json);
+		}
+	}
+ 	
+ ?>

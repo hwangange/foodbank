@@ -19,7 +19,7 @@ header('Content-Type: application/json ');
 				mysqli_close($this->connection);
 			}else{
 				$phoneNumber = intval($phoneNumber);
-				$query = "Insert into users(first, last, email, dorr, username, password, orgname, address, phoneNumber) values ('$first', '$last', '$email', '$dorr', '$username', '$password', '$orgname', '$address', '$phoneNumber')";
+				$query = "Insert into users(first, last, email, dorr, username, password, orgname, address, phoneNumber, interests) values ('$first', '$last', '$email', '$dorr', '$username', '$password', '$orgname', '$address', '$phoneNumber')";
 				$is_inserted = mysqli_query($this->connection, $query);
 				if($is_inserted == 1) {
 					$json['success'] = 'Account created';
@@ -38,6 +38,16 @@ header('Content-Type: application/json ');
 
 	if(isset($_POST['password'], $_POST['username'], $_POST['first'], $_POST['last'], $_POST['orgname'], $_POST['address'], $_POST['phoneNumber'], $_POST['email'], $_POST['dorr'])) {
 
+		if(!get_magic_quotes_gpc()) {
+			
+	        $_POST['orgname'] = addslashes($_POST['orgname']); 
+	        $_POST['address'] = addslashes($_POST['address']);
+	        $_POST['first'] = addslashes($_POST['first']);
+	        $_POST['last'] = addslashes($_POST['last']);
+	        $_POST['email'] = addslashes($_POST['email']);
+	        
+	    }
+
 		$password = $_POST['password'];
 		$username = $_POST['username'];
 		$first = $_POST['first'];
@@ -47,6 +57,7 @@ header('Content-Type: application/json ');
 		$phoneNumber = $_POST['phoneNumber'];
 		$email = $_POST['email'];
 		$dorr = $_POST['dorr'];
+		
                 
         
 
