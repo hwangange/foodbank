@@ -18,17 +18,26 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
 
-    <color name="white">#FFFFFF</color>
     <color name="lightBlue">#c2daef</color>
     <color name="profileBlue">#6fc6f7</color>
     <color name="darkSky">#7cbaf3</color>
     <color name="black">#000000</color>
     <color name="transparent_black">#40000000</color>
     <color name="official">#070d52</color>
-    <string name="title_activity_admin_nav">DeLITE</string>
-    <string name="title_activity_welcome_nav">DeLITE</string>
-    <string name="title_activity_profile">Profile</string>
-    <string name="title_activity_map">Map</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="title_activity_text_message">TextMessage</string>
+    <string name="title_activity_admin_nav">reFresh</string>
+    <string name="title_activity_welcome_nav">reFresh</string>
+    <string name="title_activity_profile">reFresh</string>
+    <string name="title_activity_map">reFresh</string>
+    <string name="title_activity_maps">reFresh</string>
+    <string name="title_activity_text_message">reFresh</string>
+    <string name="title_activity_welcome_donor">reFresh</string>
+
+    <!--Submission Form -->
+    <string-array name="paid_array">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string name="title_activity_profile_donor">ProfileDonor</string>
+    <string name="title_activity_welcome_receiver">WelcomeReceiver</string>
+    <string name="title_activity_profile_receiver">ProfileReceiver</string>
 </resources>

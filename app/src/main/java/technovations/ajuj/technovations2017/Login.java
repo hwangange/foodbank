@@ -16,7 +16,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import technovations.ajuj.technovations2017.*;
-//import com.technovations.innova.technovations2.AdminNav;
 //import com.technovations.innova.technovations2.Register;
 import technovations.ajuj.technovations2017.SessionManagement;
 //import technovations.ajuj.technovations2017.WelcomeNav;
@@ -84,11 +83,10 @@ public class Login extends AppCompatActivity{
 
 
                                 session.createLoginSession(user, name, orgname, address, phoneNumber, email, dorr);
-                                if (username.getText().toString().equals("admin") && (password.getText().toString().equals("admin"))) {
-                                    startActivity(new Intent(getApplicationContext(), AdminNav.class));
-                                } else {
-                                    startActivity(new Intent(getApplicationContext(), WelcomeNav.class));
-                                }
+                                if(dorr.equals("donor"))
+                                    startActivity(new Intent(getApplicationContext(), WelcomeDonor.class));
+                                if(dorr.equals("receiver"))
+                                    startActivity(new Intent(getApplicationContext(), WelcomeReceiver.class));
 
                             }
                             else

@@ -19,7 +19,7 @@
         android:textSize="25sp"
         android:gravity="center"
         android:allowUndo="true"
-        android:text="Welcome to DeLITE!"
+        android:text="Welcome to reFresh!"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
     <TextView
         android:id="@+id/textView2"
