@@ -161,7 +161,7 @@ public class WelcomeNav extends AppCompatActivity
 
             //this is the ID of the specific transaction being made
             Intent intent = new Intent(this, TextMessage.class);
-            String message = "uniqueID"; //editText.getText().toString();
+            String message = "3"; //editText.getText().toString();
             intent.putExtra("message", message);
             startActivity(intent);
         } else if (id == R.id.nav_logout) {
